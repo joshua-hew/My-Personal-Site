@@ -4,8 +4,12 @@ name: AWS example workflow
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
+
 env:
   BUCKET_NAME : "joshua-m-hew-personal-website"
+  CLOUDFRONT_ID: "E3NEWLAR0ZP9Z5"
   AWS_REGION : "us-east-1"
 # permission can be added at job level or workflow level    
 permissions:
@@ -24,6 +28,10 @@ jobs:
           role-session-name: githubactions
           aws-region: ${{ env.AWS_REGION }}
       # Upload a file to AWS s3
-      - name:  Copy index.html to s3
+      - name:  Copy dist directory to s3
         run: |
-          aws s3 sync . s3://${{ env.BUCKET_NAME }}/
+          aws s3 sync .dist/ s3://${{ env.BUCKET_NAME }}/
+      # Invalidate CloudFront Cache
+      - name:  Invalidate CloudFront Cache
+        run: |
+          aws  aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_ID }} --paths "/*"
