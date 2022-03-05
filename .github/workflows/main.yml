@@ -34,4 +34,4 @@ jobs:
       # Invalidate CloudFront Cache
       - name:  Invalidate CloudFront Cache
         run: |
-          aws  aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_ID }} --paths "/*"
+          aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_ID }} --paths "/*"
