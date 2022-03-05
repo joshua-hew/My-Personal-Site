@@ -30,7 +30,7 @@ jobs:
       # Upload a file to AWS s3
       - name:  Copy dist directory to s3
         run: |
-          aws s3 sync .dist/ s3://${{ env.BUCKET_NAME }}/
+          aws s3 sync ./dist s3://${{ env.BUCKET_NAME }}/
       # Invalidate CloudFront Cache
       - name:  Invalidate CloudFront Cache
         run: |
