@@ -577,6 +577,11 @@ progress {
   margin-right: 0.5rem;
 }
 
+.experience-list-items li{
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
 .initialism {
   font-size: 0.875em;
   text-transform: uppercase;
